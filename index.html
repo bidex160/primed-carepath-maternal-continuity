@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b3b36" />
+  <title>CarePath — Maternal continuity demo</title>
+  <style>
+    :root{--ink:#15322f;--muted:#60716e;--green:#0b3b36;--mint:#e8f4ee;--lime:#c8e88a;--cream:#faf8f1;--line:#dfe7e1;--white:#fff;--amber:#fff2d9;--shadow:0 14px 44px #183a3210}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid #78a94c;outline-offset:3px}
+    .top{background:var(--green);color:#fff;padding:15px max(22px,calc((100vw - 1200px)/2));display:flex;align-items:center;justify-content:space-between}.brand{font-weight:750;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}.brandmark{width:28px;height:28px;border:1px solid #bce082;border-radius:9px;display:grid;place-items:center;color:var(--lime);font-size:17px}.badge{font-size:11px;color:#dbebd9;border:1px solid #5d7f77;border-radius:100px;padding:5px 10px}
+    main{max-width:1200px;margin:auto;padding:28px 22px 56px}.crumb{color:var(--muted);font-size:13px;margin-bottom:16px}.hero{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:#528174}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.08;letter-spacing:-.045em;margin:6px 0 9px}.hero p{color:var(--muted);margin:0;max-width:640px}.demo-tag{background:var(--amber);color:#795516;padding:8px 12px;border-radius:10px;font-size:12px;white-space:nowrap}
+    .layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.85fr);gap:18px}.card{background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:22px}.card h2{font-size:18px;letter-spacing:-.025em;margin:0}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.micro{color:var(--muted);font-size:12px}.patient{display:flex;align-items:center;gap:13px}.avatar{width:48px;height:48px;border-radius:16px;background:#dcebdc;color:var(--green);display:grid;place-items:center;font-weight:750;font-size:17px}.patient h2{margin-bottom:2px}.patient p{margin:0;color:var(--muted);font-size:13px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.pill{font-size:11px;font-weight:700;border-radius:100px;padding:5px 10px;background:var(--mint);color:#28644e}.progress{margin:20px 0 6px;height:8px;background:#edf1ec;border-radius:10px;overflow:hidden}.progress span{display:block;width:54%;height:100%;background:#7db16d;border-radius:10px}.stages{display:grid;grid-template-columns:repeat(4,1fr);margin-top:10px}.stage{font-size:11px;color:#7c8985;position:relative;padding-top:18px}.stage:before{content:"";position:absolute;top:0;left:2px;width:10px;height:10px;border-radius:50%;background:#dce3dc}.stage.done{color:var(--green);font-weight:650}.stage.done:before{background:#6d9e67}.stage.current{color:var(--green);font-weight:750}.stage.current:before{background:var(--lime);box-shadow:0 0 0 3px #f2f8e8}
+    .next{margin-top:20px;border-radius:14px;padding:16px;background:#f4f8f0;display:flex;justify-content:space-between;gap:12px;align-items:center}.next strong{display:block}.next small{display:block;color:var(--muted);margin-top:2px}.date{min-width:51px;text-align:center;background:#fff;border:1px solid #e0e9dd;border-radius:11px;padding:6px 8px;color:#47784e;font-size:11px;font-weight:750}.date b{display:block;font-size:20px;line-height:1.1}
+    .actions{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}.btn{border:1px solid #c9d7cd;border-radius:10px;background:#fff;color:var(--green);padding:9px 12px;font-weight:650;font-size:13px}.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}.btn:hover{filter:brightness(.96)}
+    .visit-list{display:grid;gap:10px}.visit{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:13px}.visit-icon{width:34px;height:34px;border-radius:11px;background:var(--mint);color:#28644e;display:grid;place-items:center;font-weight:750}.visit strong{display:block;font-size:13px}.visit small{color:var(--muted);font-size:12px}.status{margin-left:auto;color:#4e785c;font-size:11px;font-weight:700;white-space:nowrap}.referral{margin-top:14px;background:#fbf8f0;border:1px solid #eee7d8;border-radius:13px;padding:13px}.referral .row{font-size:13px}.referral p{font-size:12px;color:var(--muted);margin:4px 0 0}
+    .side{display:grid;align-content:start;gap:18px}.reminder{background:var(--green);color:#fff;border:0}.reminder .micro{color:#c2d7ce}.reminder h2{margin:9px 0}.reminder p{font-size:13px;color:#e1ece7;margin:0 0 15px}.reminder .btn{background:var(--lime);border-color:var(--lime);color:#193b30}.consent-row{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.consent-row:first-of-type{border-top:0}.consent-row p{margin:0;font-size:13px}.consent-row small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.toggle{position:relative;flex:0 0 40px;height:23px;border:0;border-radius:50px;background:#cdd7d0;padding:3px;margin-left:auto}.toggle:after{content:"";display:block;width:17px;height:17px;border-radius:50%;background:#fff;transition:transform .18s}.toggle[aria-checked="true"]{background:#5b9965}.toggle[aria-checked="true"]:after{transform:translateX(17px)}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#183e35;color:#fff;padding:11px 16px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;text-align:center;font-size:13px}.toast.show{opacity:1}.foot{margin-top:20px;color:#74817c;font-size:11px;text-align:center}
+    @media(max-width:760px){main{padding:20px 14px 38px}.hero{align-items:start;flex-direction:column}.layout{grid-template-columns:1fr}.card{padding:18px}.top{padding:13px 15px}.badge{font-size:10px}.stage{font-size:10px}.demo-tag{white-space:normal}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="brand"><span class="brandmark">+</span> CarePath <span style="font-weight:450;color:#bdd2cb">by SmartClinic</span></div><span class="badge">Maternal continuity · prototype</span></header>
+  <main>
+    <div class="crumb">Care network <span aria-hidden="true">/</span> Maternal health <span aria-hidden="true">/</span> Care journey</div>
+    <section class="hero"><div><div class="eyebrow">Connected care, one step at a time</div><h1>A clear path through pregnancy and beyond.</h1><p>CarePath helps a woman and her care team keep appointments, referrals and follow-up connected across participating facilities, including low-bandwidth settings.</p></div><div class="demo-tag">Illustrative demo · fictional patient</div></section>
+    <div class="layout">
+      <section class="card" aria-labelledby="journey-title">
+        <div class="section-head"><div class="patient"><div class="avatar" aria-hidden="true">AS</div><div><h2 id="journey-title">Amina Sani</h2><p>Pregnancy journey · 24 weeks · Demo record</p></div></div><span class="pill">Active journey</span></div>
+        <div class="row"><strong style="font-size:13px">Care journey</strong><span class="micro">Week 24 of 40 · 54%</span></div><div class="progress" role="progressbar" aria-label="Pregnancy journey progress" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"><span></span></div>
+        <div class="stages"><div class="stage done">Registration</div><div class="stage done">Antenatal</div><div class="stage current">Birth plan</div><div class="stage">Postnatal care</div></div>
+        <div class="next"><div><span class="micro">NEXT CARE ACTION</span><strong>Routine antenatal visit</strong><small>Unity Community Clinic · with Midwife Grace</small></div><div class="date">JUN<b>18</b>09:30</div></div>
+        <div class="actions"><button class="btn primary" id="confirmVisit">Confirm visit</button><button class="btn" id="carePlan">View care plan</button><button class="btn" id="sharePassport">Share with provider</button></div>
+        <div style="height:1px;background:var(--line);margin:20px 0 16px"></div>
+        <div class="section-head"><h2>Care coordination</h2><span class="micro">Updated today</span></div>
+        <div class="visit-list">
+          <div class="visit"><div class="visit-icon">✓</div><div><strong>Blood pressure check</strong><small>Unity Community Clinic · 12 Jun</small></div><span class="status">Completed</span></div>
+          <div class="visit"><div class="visit-icon">↗</div><div><strong>Scan referral</strong><small>Benue Specialist Hospital · referral sent</small></div><span class="status">Booked</span></div>
+        </div>
+        <div class="referral"><div class="row"><strong>Referral follow-up</strong><span class="pill">On track</span></div><p>Appointment booked for 21 Jun. The sending clinic can see that the referral was received.</p></div>
+      </section>
+      <aside class="side">
+        <section class="card reminder"><span class="micro">FOR AMINA</span><h2>Keep your next visit close.</h2><p>A simple reminder is ready. It can be sent by SMS or shared with your community health worker.</p><button class="btn" id="sendReminder">Send reminder</button></section>
+        <section class="card"><div class="section-head"><h2>Your information</h2><span class="pill">You choose</span></div><p class="micro" style="margin:0 0 12px">Amina controls what can be shared and can change these choices at any time.</p>
+          <div class="consent-row"><div><p><strong>Care team</strong></p><small>Share appointments and referrals with assigned providers.</small></div><button class="toggle" role="switch" aria-label="Share with assigned care team" aria-checked="true"></button></div>
+          <div class="consent-row"><div><p><strong>Continuity record</strong></p><small>Allow the next facility to view the care summary.</small></div><button class="toggle" role="switch" aria-label="Share continuity record with next facility" aria-checked="true"></button></div>
+          <div class="consent-row"><div><p><strong>Research use</strong></p><small>Use de-identified information to improve services.</small></div><button class="toggle" role="switch" aria-label="Allow de-identified research use" aria-checked="false"></button></div>
+        </section>
+        <section class="card"><div class="section-head"><h2>Built for real conditions</h2></div><div class="visit-list"><div class="visit"><div class="visit-icon">◎</div><div><strong>Assisted access</strong><small>Support for patients without smartphones.</small></div></div><div class="visit"><div class="visit-icon">↯</div><div><strong>Low-bandwidth workflow</strong><small>Key actions are simple and compact.</small></div></div><div class="visit"><div class="visit-icon">⌂</div><div><strong>Connected facilities</strong><small>Care can continue across providers.</small></div></div></div></section>
+      </aside>
+    </div>
+    <p class="foot">This prototype uses fictional information and does not provide clinical advice. It demonstrates a proposed workflow; it is not connected to a live health system.</p>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const toast=document.querySelector('#toast');let timer;
+    function notify(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove('show'),2600)}
+    document.querySelector('#confirmVisit').addEventListener('click',e=>{e.currentTarget.textContent='Visit confirmed';e.currentTarget.disabled=true;notify('Visit confirmed for 18 June at 9:30. (Demo only)')});
+    document.querySelector('#carePlan').addEventListener('click',()=>notify('Care plan opened. (Demo only)'));
+    document.querySelector('#sharePassport').addEventListener('click',()=>notify('Choose a provider before sharing. No record was sent.'));
+    document.querySelector('#sendReminder').addEventListener('click',()=>notify('Reminder prepared for Amina. No message was sent.'));
+    document.querySelectorAll('.toggle').forEach(t=>t.addEventListener('click',()=>{const next=t.getAttribute('aria-checked')!=='true';t.setAttribute('aria-checked',String(next));notify(`Sharing choice ${next?'enabled':'disabled'} for this demo.`)}));
+  </script>
+</body>
+</html>
